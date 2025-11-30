@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4a5568">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MONTHLY">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <title>MONTHLY - Finance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MONTHLY</h1>
+            <div class="period-selector">
+                <label>Period:</label>
+                <select id="periodSelect">
+                    <option value="">Select or create period...</option>
+                </select>
+                <button id="newPeriodBtn">New Period</button>
+                <button id="editPeriodBtn">Edit</button>
+                <button id="deletePeriodBtn">Delete</button>
+            </div>
+            <div class="header-controls">
+                <button id="loginBtn">🔒 Login</button>
+                <span id="userEmail" style="display:none; font-size:0.85em; color:var(--text-light);"></span>
+                <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+                <button id="exportBtn" aria-label="Export data">Export</button>
+            </div>
+        </header>
+        
+        <div class="summary">
+            <div class="summary-card">
+                <div class="summary-label">Income</div>
+                <div class="summary-value income" id="totalIncome">0.00 PLN</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">Expenses</div>
+                <div class="summary-value expense" id="totalExpenses">0.00 PLN</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">Balance</div>
+                <div class="summary-value" id="balance">0.00 PLN</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">Savings</div>
+                <div class="summary-value" id="savingsRate">0%</div>
+            </div>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" data-tab="income">Income</button>
+                <button class="tab" data-tab="housing">Housing</button>
+                <button class="tab" data-tab="food">Food & Dining</button>
+                <button class="tab" data-tab="transport">Transportation</button>
+                <button class="tab" data-tab="personal">Personal</button>
+                <button class="tab" data-tab="health">Health & Fitness</button>
+                <button class="tab" data-tab="entertainment">Entertainment</button>
+                <button class="tab" data-tab="financial">Financial</button>
+                <button class="tab" data-tab="other">Other</button>
+                <button class="tab" data-tab="charts">📊 Charts</button>
+            </div>
+
+            <div class="tab-content active" id="income">
+                <div class="category-row"><label>Salary</label><input type="number" class="cat-input" data-category="Salary" data-type="income" placeholder="0.00"><span class="cat-total" data-category="Salary" data-type="income">0.00 PLN</span></div>
+                <div class="category-row"><label>Freelance</label><input type="number" class="cat-input" data-category="Freelance" data-type="income" placeholder="0.00"><span class="cat-total" data-category="Freelance" data-type="income">0.00 PLN</span></div>
+                <div class="category-row"><label>Business Income</label><input type="number" class="cat-input" data-category="Business" data-type="income" placeholder="0.00"><span class="cat-total" data-category="Business" data-type="income">0.00 PLN</span></div>
+                <div class="category-row"><label>Investment Returns</label><input type="number" class="cat-input" data-category="Investment" data-type="income" placeholder="0.00"><span class="cat-total" data-category="Investment" data-type="income">0.00 PLN</span></div>
+                <div class="category-row"><label>Rental Income</label><input type="number" class="cat-input" data-category="Rental" data-type="income" placeholder="0.00"><span class="cat-total" data-category="Rental" data-type="income">0.00 PLN</span></div>
+                <div class="category-row"><label>Bonus</label><input type="number" class="cat-input" data-category="Bonus" data-type="income" placeholder="0.00"><span class="cat-total" data-category="Bonus" data-type="income">0.00 PLN</span></div>
+                <div class="category-row"><label>Gift</label><input type="number" class="cat-input" data-category="Gift" data-type="income" placeholder="0.00"><span class="cat-total" data-category="Gift" data-type="income">0.00 PLN</span></div>
+                <div class="category-row"><label>Refund</label><input type="number" class="cat-input" data-category="Refund" data-type="income" placeholder="0.00"><span class="cat-total" data-category="Refund" data-type="income">0.00 PLN</span></div>
+                <div class="category-row"><label>Other Income</label><input type="number" class="cat-input" data-category="Other Income" data-type="income" placeholder="0.00"><span class="cat-total" data-category="Other Income" data-type="income">0.00 PLN</span></div>
+            </div>
+
+            <div class="tab-content" id="housing">
+                <div class="category-row"><label>Rent/Mortgage</label><input type="number" class="cat-input" data-category="Rent" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Rent" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Electricity</label><input type="number" class="cat-input" data-category="Electricity" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Electricity" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Water</label><input type="number" class="cat-input" data-category="Water" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Water" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Gas/Heating</label><input type="number" class="cat-input" data-category="Gas" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Gas" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Internet</label><input type="number" class="cat-input" data-category="Internet" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Internet" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Phone</label><input type="number" class="cat-input" data-category="Phone" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Phone" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Home Maintenance</label><input type="number" class="cat-input" data-category="Maintenance" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Maintenance" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Property Tax</label><input type="number" class="cat-input" data-category="Property Tax" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Property Tax" data-type="expense">0.00 PLN</span></div>
+            </div>
+
+            <div class="tab-content" id="food">
+                <div class="category-row"><label>Groceries</label><input type="number" class="cat-input" data-category="Groceries" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Groceries" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Restaurants</label><input type="number" class="cat-input" data-category="Restaurants" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Restaurants" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Fast Food</label><input type="number" class="cat-input" data-category="Fast Food" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Fast Food" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Coffee Shops</label><input type="number" class="cat-input" data-category="Coffee" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Coffee" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Food Delivery</label><input type="number" class="cat-input" data-category="Delivery" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Delivery" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Alcohol</label><input type="number" class="cat-input" data-category="Alcohol" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Alcohol" data-type="expense">0.00 PLN</span></div>
+            </div>
+
+            <div class="tab-content" id="transport">
+                <div class="category-row"><label>Public Transport</label><input type="number" class="cat-input" data-category="Public Transport" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Public Transport" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Fuel</label><input type="number" class="cat-input" data-category="Fuel" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Fuel" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Car Payment</label><input type="number" class="cat-input" data-category="Car Payment" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Car Payment" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Car Insurance</label><input type="number" class="cat-input" data-category="Car Insurance" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Car Insurance" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Car Maintenance</label><input type="number" class="cat-input" data-category="Car Maintenance" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Car Maintenance" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Parking</label><input type="number" class="cat-input" data-category="Parking" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Parking" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Taxi/Uber</label><input type="number" class="cat-input" data-category="Taxi" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Taxi" data-type="expense">0.00 PLN</span></div>
+            </div>
+
+            <div class="tab-content" id="personal">
+                <div class="category-row"><label>Clothing</label><input type="number" class="cat-input" data-category="Clothing" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Clothing" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Shoes</label><input type="number" class="cat-input" data-category="Shoes" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Shoes" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Haircut</label><input type="number" class="cat-input" data-category="Haircut" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Haircut" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Beauty Products</label><input type="number" class="cat-input" data-category="Beauty" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Beauty" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Personal Care</label><input type="number" class="cat-input" data-category="Personal Care" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Personal Care" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Laundry</label><input type="number" class="cat-input" data-category="Laundry" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Laundry" data-type="expense">0.00 PLN</span></div>
+            </div>
+
+            <div class="tab-content" id="health">
+                <div class="category-row"><label>Health Insurance</label><input type="number" class="cat-input" data-category="Health Insurance" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Health Insurance" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Doctor Visits</label><input type="number" class="cat-input" data-category="Doctor" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Doctor" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Medications</label><input type="number" class="cat-input" data-category="Medications" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Medications" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Gym Membership</label><input type="number" class="cat-input" data-category="Gym" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Gym" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Sports Equipment</label><input type="number" class="cat-input" data-category="Sports" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Sports" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Supplements</label><input type="number" class="cat-input" data-category="Supplements" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Supplements" data-type="expense">0.00 PLN</span></div>
+            </div>
+
+            <div class="tab-content" id="entertainment">
+                <div class="category-row"><label>Streaming Services</label><input type="number" class="cat-input" data-category="Streaming" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Streaming" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Movies/Cinema</label><input type="number" class="cat-input" data-category="Movies" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Movies" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Games</label><input type="number" class="cat-input" data-category="Games" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Games" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Books</label><input type="number" class="cat-input" data-category="Books" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Books" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Hobbies</label><input type="number" class="cat-input" data-category="Hobbies" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Hobbies" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Events/Concerts</label><input type="number" class="cat-input" data-category="Events" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Events" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Travel</label><input type="number" class="cat-input" data-category="Travel" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Travel" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Vacation</label><input type="number" class="cat-input" data-category="Vacation" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Vacation" data-type="expense">0.00 PLN</span></div>
+            </div>
+
+            <div class="tab-content" id="financial">
+                <div class="category-row"><label>Savings</label><input type="number" class="cat-input" data-category="Savings" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Savings" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Investments</label><input type="number" class="cat-input" data-category="Investments" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Investments" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Loan Payment</label><input type="number" class="cat-input" data-category="Loan" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Loan" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Credit Card Payment</label><input type="number" class="cat-input" data-category="Credit Card" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Credit Card" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Bank Fees</label><input type="number" class="cat-input" data-category="Bank Fees" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Bank Fees" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Insurance (Life/Other)</label><input type="number" class="cat-input" data-category="Insurance" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Insurance" data-type="expense">0.00 PLN</span></div>
+            </div>
+
+            <div class="tab-content" id="other">
+                <div class="category-row"><label>Education</label><input type="number" class="cat-input" data-category="Education" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Education" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Courses</label><input type="number" class="cat-input" data-category="Courses" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Courses" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Gifts</label><input type="number" class="cat-input" data-category="Gifts" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Gifts" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Donations</label><input type="number" class="cat-input" data-category="Donations" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Donations" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Pet Care</label><input type="number" class="cat-input" data-category="Pets" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Pets" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Childcare</label><input type="number" class="cat-input" data-category="Childcare" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Childcare" data-type="expense">0.00 PLN</span></div>
+                <div class="category-row"><label>Other</label><input type="number" class="cat-input" data-category="Other" data-type="expense" placeholder="0.00"><span class="cat-total" data-category="Other" data-type="expense">0.00 PLN</span></div>
+            </div>
+
+            <div class="tab-content" id="charts">
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Expense Breakdown</h3>
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Income vs Expenses</h3>
+                        <canvas id="incomeExpenseChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Top 5 Expenses</h3>
+                        <canvas id="topExpensesChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Savings Trend</h3>
+                        <div id="savingsTrend" class="trend-display">
+                            <div class="trend-item">
+                                <span>This Period</span>
+                                <strong id="currentSavings">0 PLN</strong>
+                            </div>
+                            <div class="trend-item">
+                                <span>Savings Rate</span>
+                                <strong id="savingsPercent">0%</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="transactions-section">
+            <div class="section-header">
+                <h2>Transactions</h2>
+                <div class="search-box">
+                    <input type="text" id="searchTransactions" placeholder="Search..." aria-label="Search transactions">
+                    <select id="filterCategory" aria-label="Filter by category">
+                        <option value="all">All Categories</option>
+                    </select>
+                </div>
+            </div>
+            <div id="transactionsList"></div>
+        </div>
+
+        <div class="quick-actions">
+            <button onclick="clearAllData()" class="action-btn">Clear All Data</button>
+            <button onclick="importData()" class="action-btn">Import Data</button>
+        </div>
+    </div>
+
+    <div id="periodModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Create New Period</h2>
+            <input type="text" id="periodName" placeholder="e.g., January 2025, Q1 2025" autofocus>
+            <div class="modal-buttons">
+                <button id="savePeriodBtn">Create</button>
+                <button id="cancelPeriodBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="importFile" accept=".json" style="display: none;">
+    
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getFirestore, doc, setDoc, getDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyAGDNejnERb-uTWxMQOsDs8beniU_Ht-ik",
+          authDomain: "monthly-ad66d.firebaseapp.com",
+          projectId: "monthly-ad66d",
+          storageBucket: "monthly-ad66d.firebasestorage.app",
+          messagingSenderId: "728410449314",
+          appId: "1:728410449314:web:558d51ef581c9d7019befb"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        window.firebaseAuth = auth;
+        window.firebaseDb = db;
+        window.GoogleAuthProvider = GoogleAuthProvider;
+        window.signInWithPopup = signInWithPopup;
+        window.onAuthStateChanged = onAuthStateChanged;
+        window.firestoreDoc = doc;
+        window.firestoreSetDoc = setDoc;
+        window.firestoreGetDoc = getDoc;
+        window.firestoreOnSnapshot = onSnapshot;
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
